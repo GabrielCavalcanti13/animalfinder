@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680683794396",
+    "project_id": "animalfinder-69c25",
+    "storage_bucket": "animalfinder-69c25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680683794396:android:5c5d44fa3bcc8525e5a919",
+        "android_client_info": {
+          "package_name": "com.example.animalfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680683794396-7ejah0qsnvnv90982bfi4d2i8iidl5ud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4_pqyiNGUAMS3l6priS-tqida0ZXGBDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680683794396-7ejah0qsnvnv90982bfi4d2i8iidl5ud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
