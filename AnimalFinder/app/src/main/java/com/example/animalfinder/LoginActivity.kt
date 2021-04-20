@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.animalfinder.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 private const val TAG = "LoginActivity"
 class LoginActivity : AppCompatActivity() {
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun goHomeActivity() {
         Log.i(TAG, "goHomeActivity")
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
