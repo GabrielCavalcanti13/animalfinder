@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.animalfinder.models.Post
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 private const val TAG = "HomeActivity"
 class HomeActivity : AppCompatActivity() {
@@ -19,7 +20,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         firestoredb = FirebaseFirestore.getInstance()
-        val postsReference = firestoredb.collection("posts")
+        val postsReference = firestoredb
+                .collection("posts")
+                .limit(15)
+                .orderBy("post_time_ms", Query.Direction.DESCENDING)
         postsReference.addSnapshotListener { snapshot, exception ->
             if (exception != null || snapshot == null) {
                 Log.e(TAG, "Exception when querying photos", exception)
