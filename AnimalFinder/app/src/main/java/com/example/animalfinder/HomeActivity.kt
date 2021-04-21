@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.example.animalfinder.models.Post
 import com.google.firebase.firestore.FirebaseFirestore
 
 private const val TAG = "HomeActivity"
@@ -24,8 +25,9 @@ class HomeActivity : AppCompatActivity() {
                 Log.e(TAG, "Exception when querying photos", exception)
                 return@addSnapshotListener
             }
-            for (document in snapshot.documents) {
-                Log.i(TAG, "Document ${document.id}: ${document.data}")
+            val postList = snapshot.toObjects(Post::class.java)
+            for (post in postList) {
+                Log.i(TAG, "Post ${post}")
             }
         }
     }
