@@ -75,6 +75,10 @@ open class HomeActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_USERNAME, signedUser?.username)
             startActivity(intent)
         }
+        if (item.itemId == R.id.navigation_camera) {
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
         return super.onOptionsItemSelected(item)
     }
 }

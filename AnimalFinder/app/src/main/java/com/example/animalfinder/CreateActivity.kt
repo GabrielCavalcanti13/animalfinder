@@ -3,9 +3,9 @@ package com.example.animalfinder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class CameraActivity : AppCompatActivity() {
+class CreateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera)
+        setContentView(R.layout.activity_create)
     }
 }
