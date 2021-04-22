@@ -10,26 +10,22 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_profile.*
 
 private const val TAG = "ProfileActivity"
-class ProfileActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-        btn_logout.setOnClickListener {
-            Log.i(TAG, "User is logging out")
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-    }
+class ProfileActivity : HomeActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.home_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.profile_menu, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.navigation_home) {
             val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+        if (item.itemId == R.id.logout) {
+            Log.i(TAG, "User is logging out")
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
         return super.onOptionsItemSelected(item)

@@ -10,7 +10,7 @@
         android:title="Camera" />
 
     <item
-        android:id="@+id/navigation_profile"
-        android:title="@string/title_notifications" />
+        android:id="@+id/logout"
+        android:title="Logout" />
 
 </menu>
