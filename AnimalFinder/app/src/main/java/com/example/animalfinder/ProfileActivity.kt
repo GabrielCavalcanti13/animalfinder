@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_profile.*
 
 private const val TAG = "ProfileActivity"
 class ProfileActivity : HomeActivity() {

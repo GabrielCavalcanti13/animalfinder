@@ -15,7 +15,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_home.*
 
 private const val TAG = "HomeActivity"
-private const val EXTRA_USERNAME = "EXTRA_USERNAME"
+const val EXTRA_USERNAME = "EXTRA_USERNAME"
 open class HomeActivity : AppCompatActivity() {
 
     private var signedUser: User? = null
