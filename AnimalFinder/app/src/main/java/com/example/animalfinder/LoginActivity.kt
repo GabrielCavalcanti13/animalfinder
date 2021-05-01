@@ -35,11 +35,20 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        btnCreateAccount.setOnClickListener {
+            goRegisterActivity()
+        }
     }
     private fun goHomeActivity() {
         Log.i(TAG, "goHomeActivity")
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun goRegisterActivity() {
+        Log.i(TAG, "goRegisterActivity")
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 }

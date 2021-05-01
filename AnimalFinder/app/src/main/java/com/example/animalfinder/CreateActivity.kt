@@ -84,6 +84,7 @@ class CreateActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to post photo", Toast.LENGTH_SHORT).show()
             }
             etDescription.text.clear()
+            etLocation.text.clear()
             etSpecie.text.clear()
             imageView.setImageResource(0)
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
@@ -107,7 +108,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun getLocation() {
         val task = fusedLocationProviderClient.lastLocation
-        var geocoder : Geocoder
+        val geocoder : Geocoder
         geocoder = Geocoder(this, Locale.getDefault())
 
 
