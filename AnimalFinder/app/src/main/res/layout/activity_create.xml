@@ -52,6 +52,8 @@
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="67dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:text="Post" />
 </LinearLayout>

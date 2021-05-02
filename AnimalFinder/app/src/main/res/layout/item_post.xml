@@ -17,6 +17,7 @@
             android:id="@+id/tvUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="Gabriel" />
 
@@ -33,6 +34,7 @@
             android:layout_height="300dp"
             android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
+            android:outlineSpotShadowColor="@color/black"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -40,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
             android:text="Macaw"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -48,6 +51,7 @@
             android:id="@+id/tvLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="Goias - Brazil" />
 
         <TextView
@@ -55,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
             android:text="Description of the post" />
 
     </LinearLayout>
