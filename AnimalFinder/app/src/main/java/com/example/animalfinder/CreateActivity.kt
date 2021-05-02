@@ -3,10 +3,12 @@ package com.example.animalfinder
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_create.*
 import java.util.*
 
 private const val PICK_PHOTO_CODE = 123
+private const val REQUEST_CODE = 321
 class CreateActivity : AppCompatActivity() {
     private var photo: Uri? = null
     private var signedUser: User? = null
@@ -49,6 +52,15 @@ class CreateActivity : AppCompatActivity() {
                 startActivityForResult(imagePickerIntent, PICK_PHOTO_CODE)
             }
         }
+
+        btnTakeImage.setOnClickListener {
+            btnTakeImage.isEnabled = false
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            if (takePictureIntent.resolveActivity(packageManager) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_CODE)
+            }
+        }
+
         btnSubmit.setOnClickListener {
             submitButtonClick()
         }
@@ -96,13 +108,15 @@ class CreateActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_PHOTO_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                photo = data?.data
-                imageView.setImageURI(photo)
-            }
+        if (requestCode == PICK_PHOTO_CODE && resultCode == Activity.RESULT_OK) {
+            photo = data?.data
+            imageView.setImageURI(photo)
+        }
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val takenImage = data?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(takenImage)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

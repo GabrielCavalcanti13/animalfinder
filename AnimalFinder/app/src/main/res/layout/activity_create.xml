@@ -18,6 +18,15 @@
         android:textColorHint="#272424"
         android:textColorLink="#FFFFFF" />
 
+    <Button
+        android:id="@+id/btnTakeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Take photo"
+        android:textColorHint="#272424"
+        android:textColorLink="#FFFFFF" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
