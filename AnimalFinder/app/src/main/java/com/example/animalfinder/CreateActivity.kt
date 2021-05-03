@@ -4,14 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
 import com.example.animalfinder.models.Post
 import com.example.animalfinder.models.User
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -21,8 +24,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_create.*
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.*
 
+private const val FILE_NAME = "photo.jpg"
 private const val PICK_PHOTO_CODE = 123
 private const val REQUEST_CODE = 321
 class CreateActivity : AppCompatActivity() {
@@ -30,6 +36,7 @@ class CreateActivity : AppCompatActivity() {
     private var signedUser: User? = null
     private lateinit var firestoredb: FirebaseFirestore
     private lateinit var storageReference: StorageReference
+    private lateinit var photoFile: File
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +61,10 @@ class CreateActivity : AppCompatActivity() {
         }
 
         btnTakeImage.setOnClickListener {
-            btnTakeImage.isEnabled = false
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            photoFile = getPhotoFile(FILE_NAME)
+            val fileProvider = FileProvider.getUriForFile(this, "com.example.animalfinder.fileprovider", photoFile)
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
             if (takePictureIntent.resolveActivity(packageManager) != null) {
                 startActivityForResult(takePictureIntent, REQUEST_CODE)
             }
@@ -108,16 +117,26 @@ class CreateActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_PHOTO_CODE && resultCode == Activity.RESULT_OK) {
             photo = data?.data
             imageView.setImageURI(photo)
         }
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val takenImage = data?.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(takenImage)
+            val bytes = ByteArrayOutputStream()
+            var image = BitmapFactory.decodeFile(photoFile.absolutePath)
+            image.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+            val path = MediaStore.Images.Media.insertImage(applicationContext.contentResolver, image, "Title", null)
+            photo = Uri.parse(path)
+            imageView.setImageBitmap(image)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun getPhotoFile(fileName: String): File {
+        val storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(fileName, ".jpg", storageDirectory)
     }
 
     private fun getLocation() {
