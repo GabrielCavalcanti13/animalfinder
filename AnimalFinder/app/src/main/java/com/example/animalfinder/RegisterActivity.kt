@@ -34,7 +34,6 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 btnRegister.isEnabled = false
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
                     firebaseUserID = auth.currentUser!!.uid
                     val documentReference = firestoredb.collection("users").document(firebaseUserID)
                     val userHashMap = HashMap<String, Any>()
@@ -42,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
                     userHashMap["age"] = Integer.valueOf(etAge.text.toString())
                     documentReference.set(userHashMap).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "$user", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
                             goLoginActivity()
                         }
                     }
